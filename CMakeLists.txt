@@ -7,8 +7,8 @@ set(JNI_DIR ${SUPPORT_LIB_DIR}/jni)
 set(OBJ_C_DIR ${SUPPORT_LIB_DIR}/objc)
 
 set(SRC_SHARED
-    "${SUPPORT_LIB_DIR}/djinni_common.hpp"
-    "${SUPPORT_LIB_DIR}/proxy_cache_interface.hpp"
+	"${SUPPORT_LIB_DIR}/djinni_common.hpp"
+	"${SUPPORT_LIB_DIR}/proxy_cache_interface.hpp"
 	"${SUPPORT_LIB_DIR}/proxy_cache_impl.hpp"
 )
 
@@ -45,7 +45,9 @@ if (APPLE)
 		CXX_STANDARD_REQUIRED true
 		CXX_EXTENSIONS false
 		FRAMEWORK TRUE
-		XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.dropbox.djinni"
+		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH NO
+		MACOSX_FRAMEWORK_BUNDLE_VERSION "1.0.0"
+		MACOSX_FRAMEWORK_IDENTIFIER "com.dropbox.djinni"
 	)
 	include_directories(
 		${SUPPORT_LIB_DIR}
