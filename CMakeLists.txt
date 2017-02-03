@@ -35,16 +35,13 @@ set(OBJ_C_SRC
 )
 
 if (APPLE)
-	find_library(FOUNDATION Foundation)
-	add_library(djinni SHARED ${SRC_SHARED} ${OBJ_C_SRC} ${OBJC_HEADERS})
-	target_link_libraries(djinni ${FOUNDATION})
+	add_library(djinni STATIC ${SRC_SHARED} ${OBJ_C_SRC} ${OBJC_HEADERS})
+	target_link_libraries(djinni "-framework Foundation")
 	source_group("objc" FILES ${OBJ_C_SRC} ${OBJC_HEADERS})
 	target_compile_options(djinni PUBLIC "-fobjc-arc")
 	set_target_properties(djinni PROPERTIES
 		CXX_STANDARD 11
 		CXX_STANDARD_REQUIRED true
-		CXX_EXTENSIONS false
-		FRAMEWORK TRUE
 		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH NO
 		MACOSX_FRAMEWORK_BUNDLE_VERSION "1.0.0"
 		MACOSX_FRAMEWORK_IDENTIFIER "com.dropbox.djinni"
