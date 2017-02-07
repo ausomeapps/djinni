@@ -46,16 +46,7 @@ source_group("cpp" FILES ${SRC_SHARED})
 
 if (APPLE)
 	list(APPEND SRC_FILES ${OBJ_C_SRC})
-	target_link_libraries(djinni "-framework Foundation")
 	source_group("objc" FILES ${OBJ_C_SRC} ${OBJC_HEADERS})
-	target_compile_options(djinni PUBLIC "-fobjc-arc")
-	set_target_properties(djinni PROPERTIES
-		CXX_STANDARD 11
-		CXX_STANDARD_REQUIRED true
-		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH NO
-		MACOSX_FRAMEWORK_BUNDLE_VERSION "1.0.0"
-		MACOSX_FRAMEWORK_IDENTIFIER "com.dropbox.djinni"
-	)
 	list(APPEND INCLUDE_DIRS ${OBJ_C_DIR})
 endif(APPLE)
 
@@ -70,3 +61,16 @@ add_library(djinni SHARED ${SRC_FILES})
 
 # Add the include directories
 include_directories(${INCLUDE_DIRS})
+
+# Do extra stuff for apple framework
+if (APPLE)
+	target_link_libraries(djinni "-framework Foundation")
+	target_compile_options(djinni PUBLIC "-fobjc-arc")
+	set_target_properties(djinni PROPERTIES
+		CXX_STANDARD 11
+		CXX_STANDARD_REQUIRED true
+		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH NO
+		MACOSX_FRAMEWORK_BUNDLE_VERSION "1.0.0"
+		MACOSX_FRAMEWORK_IDENTIFIER "com.dropbox.djinni"
+	)
+endif(APPLE)
