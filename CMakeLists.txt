@@ -57,7 +57,13 @@ if (ANDROID)
 endif(ANDROID)
 
 # Add the djinni support lib
+if (APPLE)
+add_library(djinni STATIC ${SRC_FILES})
+endif(APPLE)
+
+if (ANDROID)
 add_library(djinni SHARED ${SRC_FILES})
+endif(ANDROID)
 
 # Add the include directories
 include_directories(${INCLUDE_DIRS})
@@ -69,7 +75,7 @@ if (APPLE)
 	set_target_properties(djinni PROPERTIES
 		CXX_STANDARD 11
 		CXX_STANDARD_REQUIRED true
-		FRAMEWORK TRUE
+		FRAMEWORK FALSE
 		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH NO
 		MACOSX_FRAMEWORK_BUNDLE_VERSION "1.0.0"
 		MACOSX_FRAMEWORK_IDENTIFIER "com.dropbox.djinni"
